@@ -24,19 +24,42 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true }, (error, client)=>{
     //     console.log(result.ops)
     // })
 
-    db.collection('users').insertMany([
+    // db.collection('users').insertMany([
+    //     {
+    //         name: 'Chandler',
+    //         age: '30'
+    //     },
+    //     {
+    //         name: 'Momica',
+    //         age: '29'
+    //     }
+    // ],(error, result)=>{
+    //     if(error) {
+    //         return console.log('Unable to insert docunments')
+    //     }
+    //     console.log(result.ops)
+    // })
+
+
+    db.collection('tasks').insertMany([
         {
-            name: 'Chandler',
-            age: '30'
+            description: 'task1',
+            completed: true            
         },
         {
-            name: 'Momica',
-            age: '29'
+            description: 'task2',
+            completed: true      
+        },
+        {
+            description: 'task3',
+            completed: false      
         }
-    ],(error, result)=>{
-        if(error) {
-            return console.log('Unable to insert docunments')
+
+    ], (error, result)=>{
+        if(error){
+            return console.log('Unabke to insert task')
         }
+
         console.log(result.ops)
     })
 })
