@@ -4,68 +4,55 @@
 // const MongoClient =  mongodb.MongoClient
 // const ObjectID = mongodb.ObjectID
 
-const {MongoClient, ObjectID} = require('mongodb')
+const { MongoClient, ObjectID } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'tast-manager'
 
 const id = new ObjectID()
-console.log(id.getTimestamp(), id.id,id.id.length, id.toHexString().length)
+console.log(id.getTimestamp(), id.id, id.id.length, id.toHexString().length)
 
-MongoClient.connect(connectionURL, { useNewUrlParser:true }, (error, client)=>{
-    if( error ) {
+MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
+    if (error) {
         return console.log('Unable to connect to database!')
     }
 
-    console.log('Connected Correctly!')
     const db = client.db(databaseName)
 
-    // db.collection('users').insertOne({
-    //     name : 'John',
-    //     age :'26'
-    // },(error,result) => {
+    // db.collection('users').findOne({name: 'Jane'}, (error, user)=>{
+
+
     //     if(error) {
-    //         return console.log('Unable to inser user')
+    //         console.log('Unable to fetch!')
     //     }
-    //     console.log(result.ops)
+    //     console.log(user)
+
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Chandler',
-    //         age: '30'
-    //     },
-    //     {
-    //         name: 'Momica',
-    //         age: '29'
-    //     }
-    // ],(error, result)=>{
-    //     if(error) {
-    //         return console.log('Unable to insert docunments')
-    //     }
-    //     console.log(result.ops)
-    // })
+    db.collection('users').find({ age: '26' }).toArray((error, users) => {
+        console.log(users)
+    })
+
+    db.collection('users').find({ age: '26' }).count((error, users) => {
+        console.log(users)
+    })
 
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: 'task1',
-    //         completed: true            
-    //     },
-    //     {
-    //         description: 'task2',
-    //         completed: true      
-    //     },
-    //     {
-    //         description: 'task3',
-    //         completed: false      
-    //     }
 
-    // ], (error, result)=>{
-    //     if(error){
-    //         return console.log('Unabke to insert task')
-    //     }
+    db.collection('tasks').findOne({_id: new Object('5f3171320ad87816c52192fc')}, (error, task)=>{
+        if(error) {
+            console.log('Unable to fetch!')
+        }
+        console.log(task)
 
-    //     console.log(result.ops)
-    // })
+    })
+    
+
+    db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
+        if (error) {
+            console.log('Unable to fetch!')
+        }
+        console.log(tasks,'tasks')
+    })
+
 })
