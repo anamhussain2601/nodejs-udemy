@@ -1,10 +1,16 @@
 // CRUD operations
 
-const mongodb = require('mongodb')
-const MongoClient =  mongodb.MongoClient
+// const mongodb = require('mongodb')
+// const MongoClient =  mongodb.MongoClient
+// const ObjectID = mongodb.ObjectID
+
+const {MongoClient, ObjectID} = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'tast-manager'
+
+const id = new ObjectID()
+console.log(id.getTimestamp(), id.id,id.id.length, id.toHexString().length)
 
 MongoClient.connect(connectionURL, { useNewUrlParser:true }, (error, client)=>{
     if( error ) {
@@ -41,25 +47,25 @@ MongoClient.connect(connectionURL, { useNewUrlParser:true }, (error, client)=>{
     // })
 
 
-    db.collection('tasks').insertMany([
-        {
-            description: 'task1',
-            completed: true            
-        },
-        {
-            description: 'task2',
-            completed: true      
-        },
-        {
-            description: 'task3',
-            completed: false      
-        }
+    // db.collection('tasks').insertMany([
+    //     {
+    //         description: 'task1',
+    //         completed: true            
+    //     },
+    //     {
+    //         description: 'task2',
+    //         completed: true      
+    //     },
+    //     {
+    //         description: 'task3',
+    //         completed: false      
+    //     }
 
-    ], (error, result)=>{
-        if(error){
-            return console.log('Unabke to insert task')
-        }
+    // ], (error, result)=>{
+    //     if(error){
+    //         return console.log('Unabke to insert task')
+    //     }
 
-        console.log(result.ops)
-    })
+    //     console.log(result.ops)
+    // })
 })
