@@ -28,7 +28,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     // })
 
     db.collection('tasks').deleteOne({
-        completed: true
+        completed: 'true' 
     }).then((result)=>{
         console.log(result)
     }).catch((error)=>{
