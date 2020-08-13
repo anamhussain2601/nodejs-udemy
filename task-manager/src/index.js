@@ -1,6 +1,7 @@
 const express = require('express')
 require('./db/mongoos')   // simply runs and make sure that mongoose connect to th db.
 const User = require('./models/user')
+const Task = require('./models/task')
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -13,6 +14,16 @@ app.post('/users', (req, res) => {
     user.save().then(() => {
         res.send(user)
     }).catch((e) => {
+        res.status(400).send(e)
+    })
+})
+
+app.post('/tasks',(req,res)=>{
+    const task = new Task(req.body)
+
+    task.save().then(()=>{
+        res.send(task)
+    }).catch((e)=>{
         res.status(400).send(e)
     })
 })
