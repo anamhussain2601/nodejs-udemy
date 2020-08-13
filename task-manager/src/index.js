@@ -45,7 +45,7 @@ app.get('/users', async (req, res) => {
     // })
 })
 
-app.patch('users/:id', async(req,res)=>{
+app.patch('/users/:id', async(req,res)=>{
 
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name','email', 'password', 'age']
