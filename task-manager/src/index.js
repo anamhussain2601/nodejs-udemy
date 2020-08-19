@@ -14,25 +14,25 @@ const port = process.env.PORT || 8000
 //     }
 // })
 
-app.use((req,res,next)=>{
-    res.status(503).send('Site is currently down. check back soon')
-})
+// app.use((req,res,next)=>{
+//     res.status(503).send('Site is currently down. check back soon')
+// })
 
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
 
 const jwt = require('jsonwebtoken')
-const myFunction = async () => {
+// const myFunction = async () => {
     
-    const token = jwt.sign({ _id: 'abc123' },'thisismynewcourse', {expiresIn: '7 days'})
-    console.log(token)
+//     const token = jwt.sign({ _id: 'abc123' },'thisismynewcourse', {expiresIn: '7 days'})
+//     console.log(token)
 
-    const data = jwt.verify(token,'thisismynewcourse')
-    console.log(data)
-}
+//     const data = jwt.verify(token,'thisismynewcourse')
+//     console.log(data)
+// }
 
-myFunction()
+// myFunction()
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
