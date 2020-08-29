@@ -25,15 +25,15 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-router.get('/users', auth, async (req,res)=>{
-    try{    
-        const users = await User.find({})
-        res.send(user)
+// router.get('/users', auth, async (req,res)=>{
+//     try{    
+//         const users = await User.find({})
+//         res.send(user)
 
-    }catch(e){
-        res.status(500).send()
-    }
-})
+//     }catch(e){
+//         res.status(500).send()
+//     }
+// })
 
 router.post('/user/logout', auth, async(res,req)=>{
     try{
@@ -103,7 +103,7 @@ router.patch('/users/me', auth,  async (req, res) => {
     }
 })
 
-router.delete('/users/',auth, async (req, res) => {
+router.delete('/users/me',auth, async (req, res) => {
     try {
         // const user = await User.findByIdAndDelete(req.params.id)
 
@@ -112,7 +112,7 @@ router.delete('/users/',auth, async (req, res) => {
         // }
 
         await req.user.remove()
-        res.send(user)
+        res.send(req.user)
     } catch (e) {
         res.status(500).send()
     }

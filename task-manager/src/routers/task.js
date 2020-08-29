@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const Task = require('../models/task')
+const auth = require('../middleware/auth')
 
 
 router.get('/test1', (req,res)=>{
@@ -8,7 +9,13 @@ router.get('/test1', (req,res)=>{
 })
 
 
-router.post('/tasks', async(req, res) => {
+router.post('/tasks',auth, async(req, res) => {
+
+    const task  = new Task({
+        ...req.body,
+        owner: req.user._id
+    })
+
 
     try {
         const tasks =  await Task.find({})
