@@ -49,6 +49,14 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+
+//vitual property //not stored in the db
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',  
+    foreignField: 'owner'
+})
+
 //toJSON is called whenevr a oject is strigified
 userSchema.methods.toJSON = function() {
     const user = this
