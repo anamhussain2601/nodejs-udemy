@@ -8,7 +8,20 @@ const port = process.env.PORT || 8000
 
 const multer = require('multer')
 const upload = multer({
-    dest: 'images'
+    dest: 'images',
+    limits: {
+        // fileSize: 1000000 //megabytes
+    },
+    fileFilter(req, file ,cb) {
+
+        if(!file.originalname.match(/\.(doc|docx)$/)) {
+            return cb(new Error('Please upload a PDF'))
+        }
+        cb(undefined, true)
+        // cb(new Error('file must be PDF'))
+        // cb(undefined, true)
+        // cb(undefined, false)
+    }
 })
 
 //server is configured to accept and save file that uploaded to it
