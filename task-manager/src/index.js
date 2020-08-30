@@ -7,6 +7,7 @@ const app = express()
 const port = process.env.PORT || 8000
 
 const multer = require('multer')
+const { restart } = require('nodemon')
 const upload = multer({
     dest: 'images',
     limits: {
@@ -24,9 +25,15 @@ const upload = multer({
     }
 })
 
+// const errorMiddleware = (req,res, next) => {
+//     throw new Error('From my middleware')
+// }
+
 //server is configured to accept and save file that uploaded to it
 app.post('/upload',upload.single('upload'), (req,res) => {
     res.send()
+},(error,req,res,next)=>{
+    res.status(400).send({error: error.message})
 })
 
 app.use(express.json())
